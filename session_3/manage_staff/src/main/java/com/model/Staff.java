@@ -42,6 +42,17 @@ public class Staff {
         this.salary = salary;
         this.idBrand = idBrand;
     }
+
+    public Staff(int id, String name, int age, double salary, String image, int idBrand) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.salary = salary;
+        this.image = image;
+        this.idBrand = idBrand;
+    }
+
+
     public int getId() {
         return id;
     }

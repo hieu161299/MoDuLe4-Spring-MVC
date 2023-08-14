@@ -64,14 +64,15 @@ public class StaffService {
 
     }
     public void edit(Staff staff){
-        String sql = "UPDATE staff SET nameStaff = ?, age = ? , salary = ? , idBrand = ?  WHERE id = ?;";
+        String sql = "UPDATE staff SET nameStaff = ?, age = ? , salary = ? , image = ? , idBrand = ?  WHERE id = ?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1 , staff.getName());
             preparedStatement.setInt(2, staff.getAge());
             preparedStatement.setDouble(3, staff.getSalary());
-            preparedStatement.setInt(4, staff.getIdBrand());
-            preparedStatement.setInt(5, staff.getId());
+            preparedStatement.setString(4,staff.getImage());
+            preparedStatement.setInt(5, staff.getIdBrand());
+            preparedStatement.setInt(6, staff.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

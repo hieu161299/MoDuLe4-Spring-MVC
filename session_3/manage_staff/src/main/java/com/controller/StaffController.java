@@ -63,9 +63,17 @@ public class StaffController {
         return modelAndView;
     }
     @PostMapping("/edit")
-    public ModelAndView edit(@ModelAttribute Staff staff){
+    public ModelAndView edit(@ModelAttribute Staff staff , MultipartFile fileImg){
+        String nameFile = fileImg.getOriginalFilename();
+        try {
+            fileImg.transferTo(new File("G:/MODUL4-SPRING-MVC/session_3/manage_staff/src/main/webapp/image/" + nameFile));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        staff.setImage(nameFile);
         ModelAndView modelAndView = new ModelAndView("redirect:/staff");
-        Staff newStaff = new Staff(staff.getId() , staff.getName() , staff.getAge() , staff.getSalary() , staff.getIdBrand());
+        Staff newStaff = new Staff(staff.getId() , staff.getName() , staff.getAge() , staff.getSalary() , staff.getImage() , staff.getBrand().getId());
         staffService.edit(newStaff);
         return modelAndView;
     }
