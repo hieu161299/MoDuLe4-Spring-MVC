@@ -1,14 +1,10 @@
 package com.demo_jpa.dao;
-
 import com.demo_jpa.model.Product;
-import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -40,14 +36,18 @@ public class ProductDAO {
     }
 
     public List<Product> findByName(String name){
-        List<Product> products = new ArrayList<>();
+        /*List<Product> products = new ArrayList<>();
         for (Product p: getAll()) {
             if (p.getName().toLowerCase().contains(name.toLowerCase())){
                 products.add(p);
             }
         }
-        return products;
+        return products;*/
+        return   entityManager.createQuery("from Product where name like " + "'"  + "%" + name + "%"  +"'", Product.class).getResultList();
+
     }
+
+
     public List<Product> desc(){
        return entityManager.createQuery("from Product p order by p.price desc " , Product.class).getResultList();
     }
